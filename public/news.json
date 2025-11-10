@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "title": "Jakarta Book Festival 2025 Officially Opens",
+    "description": "Thousands of visitors filled Balai Kartini to attend the Jakarta Book Festival 2025, featuring more than 200 local and international publishers.",
+    "image": "https://picsum.photos/id/1062/800/400",
+    "createdAt": "2025-11-03T09:00:00Z"
+  },
+  {
+    "id": 2,
+    "title": "Young Indonesian Author Wins ASEAN Literature Award",
+    "description": "The debut novel 'Sky Behind Words' by Dinda Rahma won the ASEAN Literature Award for its powerful narrative and deep social themes.",
+    "image": "https://picsum.photos/id/1067/800/400",
+    "createdAt": "2025-11-02T17:20:00Z"
+  },
+  {
+    "id": 3,
+    "title": "National Publisher Launches e-Book Platform in Regional Languages",
+    "description": "This new initiative aims to preserve local languages by offering digital books in Sundanese, Javanese, and Buginese.",
+    "image": "https://picsum.photos/id/1074/800/400",
+    "createdAt": "2025-11-01T10:45:00Z"
+  },
+  {
+    "id": 4,
+    "title": "Teen Reading Interest in Indonesia Surges Throughout 2025",
+    "description": "A recent survey shows a 35% increase in young adult fiction book sales, driven by the rise of local fantasy novels and film adaptations.",
+    "image": "https://picsum.photos/id/1082/800/400",
+    "createdAt": "2025-10-30T19:10:00Z"
+  },
+  {
+    "id": 5,
+    "title": "National Digital Library Adds 50,000 New Titles",
+    "description": "The latest collection includes history books, academic research, and classic literature now freely accessible to the public.",
+    "image": "https://picsum.photos/id/1040/800/400",
+    "createdAt": "2025-10-29T13:30:00Z"
+  }
+]

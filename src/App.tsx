@@ -1,0 +1,15 @@
+import { Outlet } from "react-router";
+import Navbar from "./components/navbar/Navbar";
+import Footer from "./components/footer/Footer";
+
+export default function App() {
+  return (
+    <>
+      <Navbar />
+      <main className="min-h-screen bg-slate-50">
+        <Outlet />
+      </main>
+      <Footer />
+    </>
+  );
+}
