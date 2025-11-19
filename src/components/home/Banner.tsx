@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router";
 import bannerImg from "../../assets/hero-image.png";
 
 const Banner = () => {
+  const navigate = useNavigate();
   return (
     <section className="pt-40 pb-14">
       <div className="container mx-auto px-[3%]">
@@ -15,7 +17,12 @@ const Banner = () => {
               thrillers to captivating memories, this week&apos;s new releases
               offer something for everyone
             </p>
-            <button className="btn-primary">Subscribe</button>
+            <button
+              onClick={() => navigate("/books")}
+              className="btn-primary border-2 border-gray-900 bg-transparent py-3 text-gray-800 hover:text-white"
+            >
+              Shop Now
+            </button>
           </div>
           <div className="flex w-full items-center md:w-1/2 md:justify-end">
             <img src={bannerImg} alt="Banner Image" />

@@ -1,6 +1,5 @@
 import clsx from "clsx";
-import { useEffect, useState } from "react";
-import type { Books } from "../../types";
+import { useState } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 // import required modules
@@ -12,29 +11,25 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import BookCard from "../BookCard";
+import { useFetchAllCategoriesQuery } from "../../store/features/categories/categoriesApi";
+import { useFetchBooksByCategoryQuery } from "../../store/features/books/bookApi";
 
 const FeatureCategory = () => {
-  const [currentCategory, setcurrentCategory] = useState<string>("All Genre");
-  const [books, setBooks] = useState<Books[] | []>([]);
+  const [currentCategorySlug, setcurrentCategorySlug] =
+    useState<string>("all-genre");
 
-  const cateogries = [
-    { id: 1, name: "All Genre" },
-    { id: 2, name: "Fiction" },
-    { id: 3, name: "Non-Fiction" },
-    { id: 4, name: "Mystery" },
-    { id: 5, name: "Sci-Fi & Fantasy" },
-  ];
+  const { data: categoryResponse } = useFetchAllCategoriesQuery();
 
-  useEffect(() => {
-    fetch("books.json")
-      .then((res) => res.json())
-      .then((data) => setBooks(data));
-  }, []);
+  const categories = categoryResponse
+    ? [
+        { _id: "all", name: "All Genre", slug: "all-genre" },
+        ...categoryResponse.data,
+      ]
+    : [];
 
-  const filteredBooks =
-    currentCategory === "All Genre"
-      ? books
-      : books.filter((book) => book.category === currentCategory);
+  const { data: bookResponse } =
+    useFetchBooksByCategoryQuery(currentCategorySlug);
+  const books = bookResponse ? bookResponse.data : [];
   return (
     <section className="pt-14 pb-8">
       <div className="container mx-auto px-[3%] text-gray-600">
@@ -48,15 +43,15 @@ const FeatureCategory = () => {
               aria-label="Category Navigation"
               className="flex w-max gap-8 px-2 font-semibold"
             >
-              {cateogries.map((category) => (
+              {categories.map((category) => (
                 <button
-                  key={category.id}
-                  onClick={() => setcurrentCategory(category.name)}
+                  key={category._id}
+                  onClick={() => setcurrentCategorySlug(category.slug)}
                   className={clsx(
                     "cursor-pointer border-b-2 border-transparent pb-2 whitespace-nowrap transition-colors duration-300 hover:border-b-yellow-500 hover:text-yellow-500",
                     {
                       "border-b-yellow-500 text-yellow-500":
-                        currentCategory === category.name,
+                        currentCategorySlug === category.slug,
                     },
                   )}
                 >
@@ -94,9 +89,9 @@ const FeatureCategory = () => {
             modules={[Pagination, Navigation]}
             className="swiper"
           >
-            {filteredBooks.length > 0 &&
-              filteredBooks.map((book) => (
-                <SwiperSlide key={book.id}>
+            {books.length > 0 &&
+              books.map((book) => (
+                <SwiperSlide key={book._id}>
                   <BookCard book={book} />
                 </SwiperSlide>
               ))}

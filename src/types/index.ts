@@ -17,6 +17,63 @@ export interface Books {
   };
 }
 
+export interface Category {
+  _id: string;
+  name: string;
+  slug: string;
+  books: Buku[];
+}
+
+export interface Author {
+  _id: string;
+  name: string;
+  slug: string;
+  bio: string;
+  profileImage: string;
+  books: Buku[];
+}
+
+export interface Discount {
+  _id: string;
+  name: string;
+  percentage: number;
+  startDate: Date;
+  endDate: Date;
+  books: Buku[];
+}
+
+export interface Buku {
+  _id: string;
+  title: string;
+  slug: string;
+  description: string;
+  category: Category;
+  author: Author;
+  coverBook?: string;
+  price: number;
+  discounts: Discount;
+  stock: number;
+  reviews: [];
+}
+
+export interface CategoriesResponse {
+  success: boolean;
+  error: boolean;
+  data: Category[];
+}
+
+export interface BooksResponse {
+  success: boolean;
+  error: boolean;
+  data: Buku[];
+  pagination: {
+    totalBooks: number;
+    page: number;
+    limit: number;
+    totalPages: 1;
+  };
+}
+
 export interface NewsArticle {
   id: number;
   title: string;
@@ -33,7 +90,7 @@ export interface Author {
 }
 
 export interface CartItem {
-  id: number;
+  _id: string;
   title: string;
   price: number;
   quantity: number;
