@@ -7,7 +7,7 @@ const SearchBar = () => {
       <input
         type="text"
         placeholder="Cari Produk, Judul Buku, Penulis"
-        className="w-full rounded-full bg-slate-50 py-2.5 pr-4 pl-10 text-sm outline-none"
+        className="w-full rounded-full bg-slate-100 py-2.5 pr-4 pl-10 text-sm outline-none"
       />
     </div>
   );
