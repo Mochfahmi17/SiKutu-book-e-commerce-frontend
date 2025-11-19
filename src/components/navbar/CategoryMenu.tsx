@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 const CategoryMenu = () => {
   return (
-    <div className="group relative hidden cursor-pointer py-3 lg:block">
+    <div className="group relative hidden cursor-pointer py-2 lg:block">
       <button className="flex cursor-pointer items-center gap-4 font-semibold">
         Kategori
         <IoChevronDownOutline className="size-3" />

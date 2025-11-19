@@ -28,7 +28,7 @@ const menus = [
 
 const NavbarMobileView = () => {
   return (
-    <div className="fixed inset-x-0 bottom-0 border border-gray-200 bg-white py-4 shadow-sm lg:hidden lg:py-6">
+    <div className="fixed inset-x-0 bottom-0 z-40 border border-gray-200 bg-white py-4 shadow-sm lg:hidden lg:py-6">
       <div className="container mx-auto px-[5%] lg:px-[3%]">
         <nav>
           <ul className="flex items-center">

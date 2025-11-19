@@ -6,7 +6,7 @@ import AuthButtons from "./AuthButtons";
 
 const NavbarView = () => {
   return (
-    <header className="fixed inset-x-0 top-0 bg-white py-4 shadow-sm lg:py-6">
+    <header className="fixed inset-x-0 top-0 z-40 bg-white py-3 shadow-sm lg:py-6">
       <div className="container mx-auto px-[5%] lg:px-[3%]">
         <nav className="flex items-center gap-8">
           <div className="flex flex-1 items-center justify-between gap-6 lg:gap-12">
