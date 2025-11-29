@@ -1,20 +1,21 @@
 import { IoReload } from "react-icons/io5";
 import BannerImageSkeleton from "../../BannerImageSkeleton";
 
-type SalesBannerFallbackProps = {
+type NewReleaseBookFallbackProps = {
   isLoading: boolean;
   isError: boolean;
   refetch: () => void;
 };
 
-const SalesBannerFallback = ({
+const NewReleaseBookFallback = ({
   isLoading,
   refetch,
-}: SalesBannerFallbackProps) => {
+}: NewReleaseBookFallbackProps) => {
   if (isLoading) return <BannerImageSkeleton />;
 
   return (
-    <div className="flex aspect-4/1 w-full items-center justify-center rounded-xl bg-slate-50">
+    <div className="flex h-8 w-full flex-col items-center justify-center rounded-xl bg-slate-50">
+      <p className="text-center text-2xl font-bold">Something went wrong!</p>
       <button
         onClick={refetch}
         className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-xl font-semibold transition-colors duration-300 hover:bg-gray-100"
@@ -26,4 +27,4 @@ const SalesBannerFallback = ({
   );
 };
 
-export default SalesBannerFallback;
+export default NewReleaseBookFallback;

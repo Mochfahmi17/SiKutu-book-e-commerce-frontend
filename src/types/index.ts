@@ -41,8 +41,9 @@ export interface Book {
   coverBook?: string;
   price: number;
   discountPrice?: number;
-  discounts?: Sale;
+  sales?: Sale;
   stock: number;
+  releaseDate: Date;
   reviews: [];
   createdAt: Date;
   updatedAt: Date;
@@ -52,5 +53,12 @@ export interface SalesResponse {
   success: boolean;
   error: boolean;
   data: Sale[];
+  message?: string;
+}
+
+export interface bookResponse {
+  success: boolean;
+  error: boolean;
+  data: Book[];
   message?: string;
 }

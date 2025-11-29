@@ -25,7 +25,11 @@ export const salesApi = createApi({
       query: () => "/",
       providesTags: ["Sales"],
     }),
+    getAllActiveSales: builder.query<SalesResponse, void>({
+      query: () => "/active",
+      providesTags: ["Sales"],
+    }),
   }),
 });
 
-export const { useGetAllSalesQuery } = salesApi;
+export const { useGetAllSalesQuery, useGetAllActiveSalesQuery } = salesApi;

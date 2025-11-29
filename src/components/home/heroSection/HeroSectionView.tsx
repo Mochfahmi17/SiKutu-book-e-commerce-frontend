@@ -1,9 +1,6 @@
-import { useGetAllSalesQuery } from "../../../store/sales/salesApi";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
 import SalesBannerFallback from "./SalesBannerFallback";
 import SalesBannerSlide from "./SalesBannerSlide";
+import { useGetAllActiveSalesQuery } from "../../../store/sales/salesApi";
 
 const HeroSectionView = () => {
   const {
@@ -11,7 +8,7 @@ const HeroSectionView = () => {
     isLoading,
     refetch,
     isError,
-  } = useGetAllSalesQuery();
+  } = useGetAllActiveSalesQuery();
 
   const dataSales = salesResponse ? salesResponse.data : [];
   const isEmpty = !isLoading && !isError && dataSales.length === 0;

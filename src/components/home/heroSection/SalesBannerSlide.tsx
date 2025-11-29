@@ -2,9 +2,6 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Sale } from "../../../types";
 import SalesBannerControls from "./SalesBannerControls";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
 import SalesBannerContent from "./SalesBannerContent";
 
 type SalesBannerSlide = {
@@ -37,9 +34,9 @@ const SalesBannerSlide = ({ data }: SalesBannerSlide) => {
         }}
         className="swiper"
       >
-        {data.map((data) => (
-          <SwiperSlide key={data._id}>
-            <SalesBannerContent item={data} />
+        {data.map((item) => (
+          <SwiperSlide key={item._id}>
+            <SalesBannerContent item={item} />
           </SwiperSlide>
         ))}
       </Swiper>

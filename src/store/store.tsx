@@ -1,14 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { salesApi } from "./sales/salesApi";
+import { booksApi } from "./books/booksApi";
 // ...
 
 export const store = configureStore({
   reducer: {
     [salesApi.reducerPath]: salesApi.reducer,
+    [booksApi.reducerPath]: booksApi.reducer,
   },
 
   middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware().concat(salesApi.middleware);
+    return getDefaultMiddleware()
+      .concat(salesApi.middleware)
+      .concat(booksApi.middleware);
   },
 });
 
