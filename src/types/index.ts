@@ -56,6 +56,13 @@ export interface SalesResponse {
   message?: string;
 }
 
+export interface categoriesResponse {
+  success: boolean;
+  error: boolean;
+  data: Category[];
+  message?: string;
+}
+
 export interface bookResponse {
   success: boolean;
   error: boolean;
