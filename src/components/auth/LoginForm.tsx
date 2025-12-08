@@ -1,29 +1,54 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import type z from "zod";
+import { loginSchema } from "../../schemas";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<z.infer<typeof loginSchema>>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const onSubmit = (values: z.infer<typeof loginSchema>) => {
+    console.log(values);
+  };
+
   return (
-    <form action="" className="space-y-8">
-      <div className="space-y-6">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <div className="space-y-4">
         <div className="grid gap-1">
           <label
             htmlFor="email"
-            className="w-fit text-sm font-medium text-gray-700 dark:text-gray-300"
+            className={`${errors.email ? "text-red-500" : "text-gray-700 dark:text-gray-300"} w-fit text-sm font-medium`}
           >
             Email:
           </label>
           <input
             type="email"
             id="email"
+            {...register("email")}
             placeholder="Masukkan email anda"
-            className="w-full rounded-md bg-slate-50 px-3 py-2 text-sm text-gray-600 transition-all placeholder:text-gray-400 focus:border-black focus:ring-2 focus:ring-black focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-600 dark:bg-gray-900 dark:text-white dark:placeholder:text-gray-500 dark:focus:border-white dark:focus:ring-white"
+            className={`${errors.email ? "ring-2 ring-red-500 focus:ring-red-500" : "focus:border-black focus:ring-black"} w-full rounded-md bg-slate-50 px-3 py-2 text-sm text-gray-600 transition-all placeholder:text-gray-400 focus:ring-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-600 dark:bg-gray-900 dark:text-white dark:placeholder:text-gray-500 dark:focus:border-white dark:focus:ring-white`}
           />
+          {errors.email && (
+            <p className="text-sm text-red-500">{errors.email.message}</p>
+          )}
         </div>
         <div className="grid gap-1">
           <label
             htmlFor="password"
-            className="w-fit text-sm font-medium text-gray-700 dark:text-gray-300"
+            className={`${errors.password ? "text-red-500" : "text-gray-700 dark:text-gray-300"} w-fit text-sm font-medium`}
           >
             Password:
           </label>
@@ -31,8 +56,9 @@ const LoginForm = () => {
             <input
               type={showPassword ? "text" : "password"}
               id="password"
+              {...register("password")}
               placeholder="Masukkan password anda"
-              className="w-full rounded-md bg-slate-50 px-3 py-2 text-sm text-gray-600 transition-all placeholder:text-gray-400 focus:border-black focus:ring-2 focus:ring-black focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-600 dark:bg-gray-900 dark:text-white dark:placeholder:text-gray-500 dark:focus:border-white dark:focus:ring-white"
+              className={`${errors.password ? "ring-2 ring-red-500 focus:ring-red-500" : "focus:border-black focus:ring-black"} w-full rounded-md bg-slate-50 px-3 py-2 text-sm text-gray-600 transition-all placeholder:text-gray-400 focus:ring-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-600 dark:bg-gray-900 dark:text-white dark:placeholder:text-gray-500 dark:focus:border-white dark:focus:ring-white`}
             />
             <button
               type="button"
@@ -46,6 +72,9 @@ const LoginForm = () => {
               )}
             </button>
           </div>
+          {errors.password && (
+            <p className="text-sm text-red-500">{errors.password.message}</p>
+          )}
         </div>
       </div>
       <button

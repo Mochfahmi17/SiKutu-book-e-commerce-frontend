@@ -14,7 +14,7 @@ const NewReleaseSectionView = () => {
   const dataBooks = booksResponse ? booksResponse.data : [];
   const isEmpty = !isLoading && !isError && dataBooks.length === 0;
   return (
-    <section className="pt-4 lg:py-8">
+    <section className="pt-4 pb-8 lg:pt-8">
       <div className="container mx-auto px-[5%] md:px-[3%]">
         <div className="mb-8 flex items-center justify-between">
           <span className="block text-base font-bold lg:text-xl">

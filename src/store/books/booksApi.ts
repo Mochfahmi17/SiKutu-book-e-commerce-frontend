@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import type { bookResponse } from "../../types";
+import type { BookResponse, BooksResponse } from "../../types";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.PROD
@@ -21,15 +21,23 @@ export const booksApi = createApi({
   baseQuery,
   tagTypes: ["Books"],
   endpoints: (builder) => ({
-    getAllBooks: builder.query<bookResponse, void>({
+    getAllBooks: builder.query<BooksResponse, void>({
       query: () => "/",
       providesTags: ["Books"],
     }),
-    getNewReleasesBooks: builder.query<bookResponse, void>({
+    getNewReleasesBooks: builder.query<BooksResponse, void>({
       query: () => "/featured/new-releases",
+      providesTags: ["Books"],
+    }),
+    getBookBySlug: builder.query<BookResponse, string | undefined>({
+      query: (id) => `/${id}`,
       providesTags: ["Books"],
     }),
   }),
 });
 
-export const { useGetAllBooksQuery, useGetNewReleasesBooksQuery } = booksApi;
+export const {
+  useGetAllBooksQuery,
+  useGetNewReleasesBooksQuery,
+  useGetBookBySlugQuery,
+} = booksApi;

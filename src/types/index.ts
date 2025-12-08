@@ -43,6 +43,8 @@ export interface Book {
   discountPrice?: number;
   sales?: Sale;
   stock: number;
+  pages: number;
+  language: string;
   releaseDate: Date;
   reviews: [];
   createdAt: Date;
@@ -63,9 +65,16 @@ export interface categoriesResponse {
   message?: string;
 }
 
-export interface bookResponse {
+export interface BooksResponse {
   success: boolean;
   error: boolean;
   data: Book[];
+  message?: string;
+}
+
+export interface BookResponse {
+  success: boolean;
+  error: boolean;
+  data: Book;
   message?: string;
 }

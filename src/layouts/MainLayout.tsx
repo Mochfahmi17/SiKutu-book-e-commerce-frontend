@@ -9,7 +9,7 @@ export default function MainLayout() {
     <>
       <ScrollToTop />
       <NavbarView />
-      <main className="min-h-screen bg-white text-gray-800">
+      <main className="bg-white text-gray-800 lg:min-h-screen">
         <Outlet />
       </main>
       <FooterView />
