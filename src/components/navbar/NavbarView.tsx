@@ -3,8 +3,12 @@ import CategoryMenu from "./CategoryMenu";
 import SearchBar from "./SearchBar";
 import IconButtons from "./IconButtons";
 import AuthButtons from "./AuthButtons";
+import { useAuth } from "../../hooks/useAuth";
+import UserButton from "./UserButton";
 
 const NavbarView = () => {
+  const { user, isLoggedIn, isLoading } = useAuth();
+
   return (
     <header className="fixed inset-x-0 top-0 z-40 bg-white py-3 shadow-sm lg:py-6">
       <div className="container mx-auto px-[5%] lg:px-[3%]">
@@ -17,8 +21,13 @@ const NavbarView = () => {
           </div>
 
           <div className="hidden h-8 w-px bg-gray-300 lg:block" />
-
-          <AuthButtons />
+          {!isLoading ? (
+            isLoggedIn && user ? (
+              <UserButton user={user} />
+            ) : (
+              <AuthButtons />
+            )
+          ) : null}
         </nav>
       </div>
     </header>

@@ -1,3 +1,10 @@
+export interface User {
+  _id: string;
+  name: string;
+  email: string;
+  profileImage?: string;
+  role: "customer" | "admin";
+}
 export interface Sale {
   _id: string;
   name: string;
@@ -77,4 +84,34 @@ export interface BookResponse {
   error: boolean;
   data: Book;
   message?: string;
+}
+
+export interface RegisterResponse {
+  success: boolean;
+  error: boolean;
+  message: string;
+}
+export interface LoginResponse {
+  success: boolean;
+  error: boolean;
+  token: string;
+  message?: string;
+}
+export interface LogoutResponse {
+  success: boolean;
+  error: boolean;
+  message: string;
+}
+
+export interface UserResponse {
+  success: boolean;
+  error: boolean;
+  data: User;
+  message?: string;
+}
+
+export interface AuthenticateStatusResponse {
+  success: boolean;
+  error: boolean;
+  message: string;
 }

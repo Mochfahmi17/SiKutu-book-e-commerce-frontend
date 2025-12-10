@@ -2,15 +2,16 @@ import { CiImageOff } from "react-icons/ci";
 
 type BookImageProps = {
   coverBook?: string;
+  bookTitle: string;
 };
 
-const BookImage = ({ coverBook }: BookImageProps) => {
+const BookImage = ({ coverBook, bookTitle }: BookImageProps) => {
   return (
     <div className="mx-auto h-[425px] max-w-80 overflow-hidden rounded-xl border border-gray-200 shadow-md">
       {coverBook ? (
         <img
           src={`${import.meta.env.VITE_SERVER_URL}/uploads/cover/${coverBook}`}
-          alt=""
+          alt={bookTitle}
           className="h-full w-full object-contain"
         />
       ) : (

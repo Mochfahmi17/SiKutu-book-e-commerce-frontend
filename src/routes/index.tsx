@@ -5,6 +5,7 @@ import AuthLayout from "../layouts/AuthLayout";
 import LoginPage from "../pages/authentication/LoginPage";
 import RegisterPage from "../pages/authentication/RegisterPage";
 import BookDetailPage from "../pages/BookDetailPage";
+import GuestRoute from "../components/guard/GuestRoute";
 
 const router = createBrowserRouter([
   {
@@ -23,15 +24,20 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <AuthLayout />,
+    element: <GuestRoute />,
     children: [
       {
-        path: "/login",
-        element: <LoginPage />,
-      },
-      {
-        path: "/register",
-        element: <RegisterPage />,
+        element: <AuthLayout />,
+        children: [
+          {
+            path: "/login",
+            element: <LoginPage />,
+          },
+          {
+            path: "/register",
+            element: <RegisterPage />,
+          },
+        ],
       },
     ],
   },

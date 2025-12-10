@@ -1,13 +1,18 @@
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import type z from "zod";
 import { registerSchema } from "../../schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
+import type { RegisterResponse } from "../../types";
+import { useNavigate } from "react-router";
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isPending, startTransition] = useTransition();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -24,7 +29,33 @@ const RegisterForm = () => {
   });
 
   const onSubmit = (values: z.infer<typeof registerSchema>) => {
-    console.log(values);
+    startTransition(async () => {
+      try {
+        const serverUrl = import.meta.env.PROD
+          ? import.meta.env.VITE_SERVER_URL
+          : "http://localhost:3000";
+
+        const res = await fetch(`${serverUrl}/api/auth/register`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify(values),
+        });
+
+        const data: RegisterResponse = await res.json();
+
+        if (!res.ok) {
+          toast.error(data.message);
+          return;
+        }
+
+        toast.success(data.message);
+        navigate("/login");
+      } catch (error) {
+        console.error(error);
+        toast.error("Terjadi kesalahan.");
+      }
+    });
   };
 
   return (
@@ -42,6 +73,7 @@ const RegisterForm = () => {
             id="name"
             {...register("name")}
             placeholder="Masukkan nama anda"
+            disabled={isPending}
             className={`${errors.name ? "ring-2 ring-red-500 focus:ring-red-500" : "focus:border-black focus:ring-black"} w-full rounded-md bg-slate-50 px-3 py-2 text-sm text-gray-600 transition-all placeholder:text-gray-400 focus:ring-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-600 dark:bg-gray-900 dark:text-white dark:placeholder:text-gray-500 dark:focus:border-white dark:focus:ring-white`}
           />
           {errors.name && (
@@ -60,6 +92,7 @@ const RegisterForm = () => {
             id="email"
             {...register("email")}
             placeholder="Masukkan email anda"
+            disabled={isPending}
             className={`${errors.email ? "ring-2 ring-red-500 focus:ring-red-500" : "focus:border-black focus:ring-black"} w-full rounded-md bg-slate-50 px-3 py-2 text-sm text-gray-600 transition-all placeholder:text-gray-400 focus:ring-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-600 dark:bg-gray-900 dark:text-white dark:placeholder:text-gray-500 dark:focus:border-white dark:focus:ring-white`}
           />
           {errors.email && (
@@ -79,6 +112,7 @@ const RegisterForm = () => {
               id="password"
               {...register("password")}
               placeholder="Masukkan password anda"
+              disabled={isPending}
               className={`${errors.password ? "ring-2 ring-red-500 focus:ring-red-500" : "focus:border-black focus:ring-black"} w-full rounded-md bg-slate-50 px-3 py-2 text-sm text-gray-600 transition-all placeholder:text-gray-400 focus:ring-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-600 dark:bg-gray-900 dark:text-white dark:placeholder:text-gray-500 dark:focus:border-white dark:focus:ring-white`}
             />
 
@@ -111,6 +145,7 @@ const RegisterForm = () => {
               id="confirm_password"
               {...register("confirmPassword")}
               placeholder="Masukkan konfirmasi password anda"
+              disabled={isPending}
               className={`${errors.confirmPassword ? "ring-2 ring-red-500 focus:ring-red-500" : "focus:border-black focus:ring-black"} w-full rounded-md bg-slate-50 px-3 py-2 text-sm text-gray-600 transition-all placeholder:text-gray-400 focus:ring-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-600 dark:bg-gray-900 dark:text-white dark:placeholder:text-gray-500 dark:focus:border-white dark:focus:ring-white`}
             />
             <button
@@ -134,9 +169,10 @@ const RegisterForm = () => {
       </div>
       <button
         type="submit"
-        className="w-full cursor-pointer rounded-md bg-gray-800 py-2 text-sm font-semibold text-white shadow-sm transition-colors duration-300 hover:bg-gray-700"
+        disabled={isPending}
+        className="w-full cursor-pointer rounded-md bg-gray-800 py-2 text-sm font-semibold text-white shadow-sm transition-colors duration-300 hover:bg-gray-700 disabled:opacity-50"
       >
-        Daftar
+        {isPending ? "Loading..." : "Daftar"}
       </button>
     </form>
   );

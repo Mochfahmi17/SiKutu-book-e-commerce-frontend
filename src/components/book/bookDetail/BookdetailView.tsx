@@ -31,7 +31,7 @@ const BookdetailView = () => {
     <section className="pt-20 pb-16 md:pt-24 lg:pt-28">
       <div className="container mx-auto px-[5%] md:px-[3%]">
         <div className="flex flex-wrap gap-12">
-          <BookImage coverBook={book.coverBook} />
+          <BookImage coverBook={book.coverBook} bookTitle={book.title} />
 
           <div className="flex-1 space-y-4">
             <BookTitlePrice title={book.title} price={book.price} />
